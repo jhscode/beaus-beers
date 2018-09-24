@@ -7,21 +7,26 @@ const rootURL = `http://lcboapi.com/products?access_key=${apiKey}`
 class App extends Component {  
   state = {
     product: 'beer',
-    data: null
+    datas: []
   }
-  
-  onClickBeer = async (e) => {
-    const url = await fetch(`${rootURL}&q=beer&`);
-    const data = await url.json();
+
+  async componentDidMount() {
+    const url = await fetch(`${rootURL}&q=beer`);
+    const datas = await url.json();
     this.setState({
-      data: data.results
-    })
+      datas: datas.result
+    });
+    console.log(datas);
+  }
+
+  onClickBeer = () => {
+    console.log(this.state.datas)
   }
   
   render() {
     return (
       <div className="App">
-      <button onClick={ this.onClickBeer }>Click Me!</button>
+      <button onClick={ this.onClickBeer }>Click Me To See The Beer</button>
       </div>
     );
   }
