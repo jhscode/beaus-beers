@@ -11,9 +11,8 @@ class App extends Component {
   }
   
   onClickBeer = async (e) => {
-    const url = await fetch(`${rootURL}&q=beer`);
+    const url = await fetch(`${rootURL}&q=beer&`);
     const data = await url.json();
-    console.log(data);
     this.setState({
       data: data.results
     })
