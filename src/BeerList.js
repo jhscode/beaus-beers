@@ -13,11 +13,9 @@ class BeerList extends Component {
   async componentDidMount() {
     // Documentation says API Call says maxiumum per page is 200. It is incorrect
     const url = await fetch(`${rootURL}&q=beaus+brewing&per_page=100&where_not=is_discontinued`)
-    const results = await url.json();
-    console.log(results);
-    const datas = await
+    const datas = await url.json();
     this.setState({
-      datas
+      datas: datas.result
     });
   }
 
