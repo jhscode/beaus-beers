@@ -9,6 +9,8 @@ class BeerList extends Component {
     datas: []
   }
 
+  // Instead of a prompt to ask what type of beer, below lifecycle method 
+  // used to show Beau's beers preference to show on the app
   async componentDidMount() {
     // Documentation says API Call says maxiumum per page is 200. It is incorrect
     // API call filters for only beau's brewery, that is available at LCBO and is seasonal. Since Lug Tread is not seasonal, already filtered out.
@@ -28,6 +30,8 @@ class BeerList extends Component {
             <Beer 
               data={ data }
               key={ data.id }
+              id= { data.id }
+              desc= { data.description}
             />
           )}
         </ul>
