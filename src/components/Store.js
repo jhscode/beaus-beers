@@ -1,68 +1,24 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 
-const apiKey = process.env.REACT_APP_API_KEY;
-const rootStoreURL = `http://lcboapi.com/stores?access_key=${apiKey}`;
+export default (props) => (
+  <Fragment>
+    <div className="store-results">
+      {props.storeDataResults.map((storeDataResult) => {
+        console.log(storeDataResult);
 
-class Store extends Component {
-  state = {
-    storeDataResults: [],
-    nextPage:""
-  };
-
-  async componentDidMount() {
-    // make api call to stores
-    const productID = this.props.state.productID;
-    const storeURL = await fetch(`${rootStoreURL}&product_id=${productID}`);
-    const storeData = await storeURL.json();
-    const storeDataResults = storeData.result;
-    const nextPage = storeData.pager.next_page_path;
-    this.setState({
-      storeDataResults,
-      nextPage
-    });
-  };
-
-  loadMoreStores = async() => {
-    // console.log(this.state);
-    const nextPage = this.state.nextPage;
-    // console.log(nextPage);
-    const nextPageURL = await fetch(`http://lcboapi.com${nextPage}`);
-    // console.log(nextPageURL);
-    const nextPageData = await nextPageURL.json();
-    console.log(nextPageData);
-    const afterNextPage = nextPageData.pager.next_page_path;
-    this.setState(() => ({
-      storeDataResults: nextPageData.result,
-      nextPage: afterNextPage
-    }));
-  };
-
-  render() {
-    return (
-      <Fragment>
-        <div className="store">
-          <div className="store-results">
-            {this.state.storeDataResults.map((storeDataResult) =>{
-              return(
-                <div key={storeDataResult.id}>
-                  <div>
-                  
-                  </div>
-                  Address: {storeDataResult.address_line_1}
-                  Address 2: {storeDataResult.address_line_2}
-                  Postal Code: {storeDataResult.postal_code}
-                  Telephone: {storeDataResult.telephone}
-                </div>
-              )}            
-            )}
+        return(
+          <div key={storeDataResult.id}>
+            Address: {storeDataResult.address_line_1}
+            Address 2: {storeDataResult.address_line_2}
+            Postal Code: {storeDataResult.postal_code}
+            Telephone: {storeDataResult.telephone}
+            <button onClick={ () => props.findStore(storeDataResult.latitude, storeDataResult.longitude)}>Find Store</button>
           </div>
-          <button onClick = { () => this.loadMoreStores() }>
-          Load More
-          </button>              
-        </div>
-      </Fragment>
-    )
-  }
-};
-
-export default Store;
+        )}            
+      )}
+    </div>
+    <button onClick = { () => props.loadMoreStores() }>
+    Load More
+    </button>            
+  </Fragment>  
+);

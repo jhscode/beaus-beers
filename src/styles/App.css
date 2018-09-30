@@ -1,3 +1,6 @@
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
+  display: block; }
+
 .modal {
   position: fixed;
   top: 0;
@@ -23,4 +26,8 @@
 
 .display-none {
   display: none;
+}
+
+.beer-container {
+  display: flex;
 }

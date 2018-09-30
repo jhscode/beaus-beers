@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import BeerList from './BeerList';
-import Store from './Store';
+import StoreList from './StoreList';
 import '../styles/App.css';
 
 const apiKey = process.env.REACT_APP_API_KEY;
@@ -59,6 +59,10 @@ class App extends Component {
     });
   };
 
+  findStore = (lat, lon) => {
+    console.log(lat, lon);
+  }
+
   render() {
     return (
       <Router>
@@ -78,8 +82,10 @@ class App extends Component {
           <Route 
             path="/store/:storeid"
             render={(props) => 
-              <Store {...props} state={this.state} 
-          />
+              <StoreList 
+                {...props} state={this.state}
+                findStore={ this.findStore }
+              />
         }
           />  
         </div>
