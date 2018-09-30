@@ -1,30 +1,11 @@
-import React, { Component } from 'react';
-
-const apiKey = process.env.REACT_APP_API_KEY;
-const rootStoreURL = `http://lcboapi.com/stores?access_key=${apiKey}`
+import React, { Component, Fragment } from 'react';
 
 class Beer extends Component {
-  state = {
-    storeData: [],
-    page: null
-  }
-
-  showDescription = (desc) => {
-    console.log(desc);
-    
-  }
-
-  showStore = async(productID) => {
-    console.log(productID);
-    // make api call to stores
-    const storeURL = await fetch(`${rootStoreURL}&product_id=${productID}&per_page=100`)
-    const storeData = await storeURL.json();
-    console.log(storeData);
-  }
-
   render() {
     return (
-    <div>
+    <Fragment>
+      <h3>{ this.props.data.name }</h3>
+      {/* This will show either the image or logo of beau's */}
       { this.props.data.image_thumb_url?
         <div>
           <img 
@@ -39,17 +20,18 @@ class Beer extends Component {
           /> 
         </div>                  
       }
-      <p>{ this.props.data.name }</p>
       <button
-        onClick={ () => this.showDescription(this.props.data) }
+        className="button-description"
+        onClick={ () => this.props.showDescButton(this.props.data) }
       >
       Description
       </button>
       <button
-        onClick={ () => this.showStore(this.props.id) }
+        className="button-stores"
+        onClick={ () => this.props.goToStoreButton(this.props.id) }
       >Stores
       </button>
-    </div>
+    </Fragment>
     )
   }
 }
