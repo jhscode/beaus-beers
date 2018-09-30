@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import BeerList from './BeerList';
 import Store from './Store';
-import NotFound from './NotFound';
 import '../styles/App.css';
 
 const apiKey = process.env.REACT_APP_API_KEY;
