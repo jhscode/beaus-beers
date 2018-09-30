@@ -15,7 +15,6 @@ class Store extends Component {
     const storeURL = await fetch(`${rootStoreURL}&product_id=${productID}`);
     const storeData = await storeURL.json();
     const storeDataResults = storeData.result;
-    console.log(storeDataResults);
     const nextPage = storeData.pager.next_page_path;
     this.setState({
       storeDataResults,
@@ -23,33 +22,47 @@ class Store extends Component {
     });
   };
 
-  loadMoreStore = async() => {
-    const nextpage = this.props.nextpage;
-    console.log(nextpage);
-    const nextPageURL = await fetch(`http://lcboapi.com/${nextpage}`);
-    console.log(nextPageURL);
+  loadMoreStores = async() => {
+    // console.log(this.state);
+    const nextPage = this.state.nextPage;
+    // console.log(nextPage);
+    const nextPageURL = await fetch(`http://lcboapi.com${nextPage}`);
+    // console.log(nextPageURL);
+    const nextPageData = await nextPageURL.json();
+    console.log(nextPageData);
+    const afterNextPage = nextPageData.pager.next_page_path;
+    this.setState(() => ({
+      storeDataResults: nextPageData.result,
+      nextPage: afterNextPage
+    }));
   };
 
   render() {
     return (
-      <div className="store">
-        <div className="store-results">
-        {this.state.storeDataResults.map((storeDataResult) =>{
-          return(
-            <div key={storeDataResult.id}>
-              <div>
-              
-              </div>
-              Address: {storeDataResult.address_line_1}
-            </div>
-          )
-        }
-        )}
+      <Fragment>
+        <div className="store">
+          <div className="store-results">
+            {this.state.storeDataResults.map((storeDataResult) =>{
+              return(
+                <div key={storeDataResult.id}>
+                  <div>
+                  
+                  </div>
+                  Address: {storeDataResult.address_line_1}
+                  Address 2: {storeDataResult.address_line_2}
+                  Postal Code: {storeDataResult.postal_code}
+                  Telephone: {storeDataResult.telephone}
+                </div>
+              )}            
+            )}
+          </div>
+          <button onClick = { () => this.loadMoreStores() }>
+          Load More
+          </button>              
         </div>
-      </div>
+      </Fragment>
     )
   }
 };
 
 export default Store;
-{/* <button onClick = { () => this.loadMoreStores }>Load More</button>              */}
