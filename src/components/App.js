@@ -101,7 +101,9 @@ class App extends Component {
               updateMap={ this.updateMap }
             />
           }
-        />           */}
+        />           
+        Would have used the Lat as differentiater for each store
+        */}
         </div>
       </Router>
     );
