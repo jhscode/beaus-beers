@@ -1,5 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Store from './Store';
+import StoreMaps from './StoreMaps';
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const rootStoreURL = `http://lcboapi.com/stores?access_key=${apiKey}`;
@@ -35,8 +36,11 @@ class StoreList extends Component {
       nextPage: afterNextPage
     }));
   };
-
-
+  
+  goToMapStore = (lat, lng) => {
+    this.props.updateMap(lat, lng);
+    this.props.history.push(`/map/${lat}`);
+  };
 
   render() {
     return (
@@ -44,8 +48,9 @@ class StoreList extends Component {
         <Store 
           storeDataResults={ this.state.storeDataResults }
           loadMoreStores= { this.loadMoreStores }
-          findStore={ this.props.findStore }
+          goToMapStore={ this.goToMapStore }
         />
+        {/* <StoreMaps /> */}
       </div>
     );
   };

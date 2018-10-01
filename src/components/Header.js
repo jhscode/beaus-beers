@@ -2,6 +2,6 @@ import React from 'react';
 
 export default () => (
  <div>
-   Header
+   <h1>Beau's Brewery!</h1>
  </div> 
 );

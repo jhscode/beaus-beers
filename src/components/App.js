@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import BeerList from './BeerList';
 import StoreList from './StoreList';
+import StoreMaps from './StoreMaps';  
 import '../styles/App.css';
 
 const apiKey = process.env.REACT_APP_API_KEY;
@@ -19,8 +20,10 @@ class App extends Component {
     price_in_cents: null,
     tasting_note: "",
     description: "",
-    productID:""
-  }
+    productID:"",
+    lat: null,
+    lng: null
+  };
 
   // Instead of a prompt to ask what type of beer, below lifecycle method 
   // used to show Beau's beers preference to show on the app
@@ -32,18 +35,18 @@ class App extends Component {
     this.setState({
       datas: datas.result
     });
-  }
+  };
 
   // Since description can be empty, making variables for other descriptions of the beer to display
   showDescButton = (desc) => {
     // package is reserved word in strict mode. Make another name
-    const { name, price_in_cents, tasting_note, description } = desc;
+    const { name, price_in_cents, tasting_note, serving_suggestion } = desc;
     this.setState({
       showDesc: true,
       name,
       price_in_cents,
       tasting_note,
-      description
+      serving_suggestion
     });
   };
 
@@ -53,15 +56,18 @@ class App extends Component {
     });
   };
 
-  updateStore =(productID) => {
+  updateStore = (productID) => {
     this.setState({
       productID
     });
   };
 
-  findStore = (lat, lon) => {
-    console.log(lat, lon);
-  }
+  updateMap = (lat, lng) => {
+    this.setState({
+      lat,
+      lng
+    })
+  };
 
   render() {
     return (
@@ -74,20 +80,28 @@ class App extends Component {
               {... props} state={this.state} 
               showDescButton={this.showDescButton}
               hideDescButton={this.hideDescButton}
-              goToStoreButton={this.goToStoreButton}
               updateStore={this.updateStore}
             />
           }
         />
-          <Route 
-            path="/store/:storeid"
-            render={(props) => 
-              <StoreList 
-                {...props} state={this.state}
-                findStore={ this.findStore }
-              />
-        }
-          />  
+        <Route 
+          path="/store/:storeid"
+          render={(props) => 
+            <StoreList 
+              {...props} state={this.state}
+              updateMap={ this.updateMap }
+            />
+          }
+        />  
+        {/* <Route 
+          path="/map/:lat"
+          render={(props) => 
+            <StoreMaps 
+              {...props} state={this.state}
+              updateMap={ this.updateMap }
+            />
+          }
+        />           */}
         </div>
       </Router>
     );

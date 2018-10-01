@@ -1,6 +1,30 @@
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
   display: block; }
 
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  .button {
+    display: inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid rgb(29, 26, 26);
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:rgb(19, 17, 17);
+    text-align:center;
+    transition: all 0.2s;
+}
+
+.beer-name {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  height: 10px;
+}
 .modal {
   position: fixed;
   top: 0;
@@ -26,8 +50,4 @@ article, aside, details, figcaption, figure, footer, header, hgroup, nav, sectio
 
 .display-none {
   display: none;
-}
-
-.beer-container {
-  display: flex;
 }
