@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import Beer from './Beer';
 import Description from './Description';
 import Header from './Header';
-import StoreMaps from './StoreMaps';
 
 class BeerList extends Component {
 
@@ -11,9 +10,7 @@ class BeerList extends Component {
     this.props.history.push(`/store/${productID}`);
   };
 
-  goToMapStore = (lat, lng) => {
 
-  };
 
   render() {
     return (
