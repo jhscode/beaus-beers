@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import BeerList from './BeerList';
-import StoreList from './StoreList';
-import StoreMaps from './StoreMaps';  
-import '../styles/App.css';
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+import BeerList from './components/BeerList';
+import StoreList from './components/StoreList';
+import StoreMaps from './components/StoreMaps';  
+import './styles/App.css';
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const rootProductURL = `http://lcboapi.com/products?access_key=${apiKey}`;
 
-class App extends Component {  
+class App extends Component {
   state = {
     datas: [],
     storeDataResult: [],
@@ -27,15 +28,15 @@ class App extends Component {
 
   // Instead of a prompt to ask what type of beer, below lifecycle method 
   // used to show Beau's beers preference to show on the app
-  async componentDidMount() {
-    // Documentation says API Call says maxiumum per page is 200. It is incorrect. Only 100.
-    // API call filters for only beau's brewery, that is available at LCBO and is seasonal. Since Lug Tread is not seasonal, already filtered out.
-    const url = await fetch(`${rootProductURL}&q=beaus+brewing&per_page=100&where_not=is_discontinued,is_dead&where=is_seasonal`)
-    const datas = await url.json();
-    this.setState({
-      datas: datas.result
-    });
-  };
+  // async componentDidMount() {
+  //   // Documentation says API Call says maxiumum per page is 200. It is incorrect. Only 100.
+  //   // API call filters for only beau's brewery, that is available at LCBO and is seasonal. Since Lug Tread is not seasonal, already filtered out.
+  //   const url = await fetch(`${rootProductURL}&q=beaus+brewing&per_page=100&where_not=is_discontinued,is_dead&where=is_seasonal`)
+  //   const datas = await url.json();
+  //   this.setState({
+  //     datas: datas.result
+  //   });
+  // };
 
   // Since description can be empty, making variables for other descriptions of the beer to display
   showDescButton = (desc) => {
@@ -105,9 +106,9 @@ class App extends Component {
         Would have used the Lat as differentiater for each store
         */}
         </div>
-      </Router>
-    );
+      </Router>    );
   }
 }
 
 export default App;
+

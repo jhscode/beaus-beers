@@ -9,9 +9,7 @@ class BeerList extends Component {
     this.props.updateStore(productID);
     this.props.history.push(`/store/${productID}`);
   };
-
-
-
+  
   render() {
     return (
       <Fragment>
