@@ -6,16 +6,18 @@ class Beer extends Component {
       <div className="beer-container">
         <div className="beer-image">
           {/* This will show either the image or logo of beau's */}
-          { this.props.data.image_thumb_url?
+          { this.props.data.image_thumb_url 
+            ?
             <div className="picture-container">
               <img 
               src={ this.props.data.image_thumb_url }
               alt=""
               /> 
-            </div> :
+            </div> 
+            :
             <div>
               <img 
-                src="/beaus-image.png" 
+                src="/styles/img/beaus-image.png" 
                 alt=""
               /> 
             </div>                  

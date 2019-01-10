@@ -13,12 +13,9 @@ class BeerList extends Component {
   render() {
     return (
       <Fragment>
-        <header>
-          <Header />
-        </header>
         <div className="beerlist-container">
           <ul className="beerlist-list">
-            { this.props.state.datas.map(data =>
+            { this.props.datas.map(data =>
               <Beer 
                 data={ data }
                 key={ data.id }
@@ -30,12 +27,12 @@ class BeerList extends Component {
             )}
           </ul>
           <Description 
-            showDesc={ this.props.state.showDesc }
+            showDesc={ this.props.showDesc }
             hideDescButton = { this.props.hideDescButton } 
-            name= { this.props.state.name }
-            price= { this.props.state.price_in_cents }
-            tasting_notes= { this.props.state.tasting_note }
-            serving_suggestion= { this.props.state.serving_suggestion } 
+            name= { this.props.name }
+            price= { this.props.price_in_cents }
+            tasting_notes= { this.props.tasting_note }
+            serving_suggestion= { this.props.serving_suggestion } 
           />
         </div> 
       </Fragment>
