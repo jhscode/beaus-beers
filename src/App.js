@@ -8,7 +8,7 @@ import StoreMaps from './components/StoreMaps';
 import './styles/App.css';
 
 const apiKey = process.env.REACT_APP_API_KEY;
-const rootProductURL = `http://lcboapi.com/products?access_key=${apiKey}`;
+const rootProductURL = `https://lcboapi.com/products?access_key=${apiKey}`;
 
 class App extends Component {
   state = {
